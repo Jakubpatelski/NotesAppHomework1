@@ -14,6 +14,7 @@
 		15C6712A299B96BA0063FE49 /* NotesAppHomeworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C67129299B96BA0063FE49 /* NotesAppHomeworkTests.swift */; };
 		15C67134299B96BA0063FE49 /* NotesAppHomeworkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C67133299B96BA0063FE49 /* NotesAppHomeworkUITests.swift */; };
 		15C67136299B96BA0063FE49 /* NotesAppHomeworkUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C67135299B96BA0063FE49 /* NotesAppHomeworkUITestsLaunchTests.swift */; };
+		15C67143299B982A0063FE49 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C67142299B982A0063FE49 /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		15C6712F299B96BA0063FE49 /* NotesAppHomeworkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesAppHomeworkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15C67133299B96BA0063FE49 /* NotesAppHomeworkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesAppHomeworkUITests.swift; sourceTree = "<group>"; };
 		15C67135299B96BA0063FE49 /* NotesAppHomeworkUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesAppHomeworkUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		15C67142299B982A0063FE49 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			children = (
 				15C67117299B96B30063FE49 /* NotesAppHomeworkApp.swift */,
 				15C67119299B96B30063FE49 /* ContentView.swift */,
+				15C67142299B982A0063FE49 /* DetailView.swift */,
 				15C6711B299B96B90063FE49 /* Assets.xcassets */,
 				15C6711D299B96B90063FE49 /* NotesAppHomework.entitlements */,
 				15C6711E299B96B90063FE49 /* Preview Content */,
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15C6711A299B96B30063FE49 /* ContentView.swift in Sources */,
+				15C67143299B982A0063FE49 /* DetailView.swift in Sources */,
 				15C67118299B96B30063FE49 /* NotesAppHomeworkApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
