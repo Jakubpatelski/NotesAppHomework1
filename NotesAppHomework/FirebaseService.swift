@@ -17,8 +17,6 @@ class FirebaseService: ObservableObject {
        
        func addData(title: String) {
            
-//           // Get a reference to the database
-//           let db = Firestore.firestore()
            
            // Add a document to a collection
            db.collection("notes2").addDocument(data: ["title":title]) { error in
@@ -38,8 +36,6 @@ class FirebaseService: ObservableObject {
        
        func getData() {
 
-           // Get a reference to the database
-//            let db = Firestore.firestore()
 
            // Read the documents at a specific path
            db.collection("notes2").getDocuments { snapshot, error in
