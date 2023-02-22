@@ -15,9 +15,6 @@ class FirebaseService: ObservableObject {
     let db = Firestore.firestore()
     @Published var list = [Item]()
        
-    
-       
-       
        func addData(title: String) {
            
 //           // Get a reference to the database
