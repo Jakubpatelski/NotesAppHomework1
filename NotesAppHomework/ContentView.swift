@@ -9,71 +9,66 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var myList = [
-    Item(title: "First Note"),
-    Item(title: "Second Note")
-    ]
-    @State private var newText: String = ""
+    @ObservedObject var model = FirebaseService()
+    @State var title = ""
+   
     var body: some View {
         VStack {
-            NavigationView {
+                        NavigationView {
+                           
+                            List {
+                                ForEach($model.list) { item in
+                                    NavigationLink(destination: DetailView(text: item.title)) {
+                                        Text(item.title.wrappedValue)
+                                    }
+                                }
+            
+            
+                                }
 
-//                List($myList){ item in
-//                    NavigationLink(destination: DetailView(text: item.title)) {
-//                        Text(item.title.wrappedValue)
-//
-//                    }
-//                }
-                List {
-                    ForEach($myList) { item in
-                        NavigationLink(destination: DetailView(text: item.title)) {
-                            Text(item.title.wrappedValue)
+                           .navigationBarTitle("Notes")
                         }
-                    }
-                    .onDelete { indexSet in
-                        myList.remove(atOffsets: indexSet)
-                    }
-                }
-                
-                .navigationBarTitle("Notes")
-            }
-
+            
+            
+            
+            
             VStack(spacing: 20){
-                TextField("Enter text", text: $newText)
-                .padding()
-                .background(Color.gray.opacity(0.3).cornerRadius(10))
-                .foregroundColor(.black)
-                .font(.headline)
+                TextField("Enter text", text: $title)
+                
+                    .padding()
+                    .background(Color.gray.opacity(0.3).cornerRadius(10))
+                    .foregroundColor(.black)
+                    .font(.headline)
                 
                 Button {
                     
-                    if(!newText.isEmpty){
-                        myList.append(Item(title: newText))
-                        newText=""
-                        print(myList)
+                    if(!title.isEmpty){
+                        model.addData(title: title)
+                        
                     }
+                    
                     
                 } label: {
                     Text("ADD NOTE")
                 }
-
+                
                 .font(.headline)
                 .accentColor(.white)
                 .padding()
                 .padding(.horizontal, 50)
                 .background(Color.blue.cornerRadius(10).shadow(radius: 10))
-
-            }
-        
-
-            .padding()
                 
             }
-
+            
+            
+            .padding()
+            
         }
-
-    
+        
     }
+    
+}
+   
 
 
 struct Item: Identifiable, Codable {

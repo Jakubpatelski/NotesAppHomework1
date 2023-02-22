@@ -16,6 +16,7 @@ struct DetailView: View {
                 .multilineTextAlignment(.center)
                 .font(.system(size: 32, weight: .medium))
                 
+//            Spacer()
         }
         .padding()
 
