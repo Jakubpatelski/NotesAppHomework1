@@ -9,17 +9,18 @@ import Foundation
 import Firebase
 
 class FirebaseService: ObservableObject {
-
+    
     
     // Get a reference to the database
     let db = Firestore.firestore()
     @Published var list = [Item]()
-       
-       func addData(title: String) {
-           
+    var notesCol = "notes2"
+    
+    
+    func addData(title: String) {
            
            // Add a document to a collection
-           db.collection("notes2").addDocument(data: ["title":title]) { error in
+           db.collection(notesCol).addDocument(data: ["title": title,]) { error in
                
                // Check for errors
                if error == nil {
@@ -36,29 +37,29 @@ class FirebaseService: ObservableObject {
        
        func getData() {
 
-
            // Read the documents at a specific path
-           db.collection("notes2").getDocuments { snapshot, error in
-
+           db.collection(notesCol).getDocuments { snapshot, error in
+               
                // Check for errors
                if error == nil {
                    // No errors
-
+                   
                    if let snapshot = snapshot {
-
+                       
                        // Update the list property in the main thread
                        DispatchQueue.main.async {
-
+                           
                            // Get all the documents and create Todos
                            self.list = snapshot.documents.map { d in
-
+                               
                                // Create a Todo item for each document returned
-                               return Item(
+                               return Item(id: d.documentID,
                                            title: d["title"] as? String ?? "")
+                                          
                            }
                        }
-
-
+                       
+                       
                    }
                }
                else {
@@ -66,6 +67,31 @@ class FirebaseService: ObservableObject {
                }
            }
        }
+ 
+    func deleteData(todoToDelete: Item) {
+        
+        // Specify the document to delete
+        db.collection(notesCol).document(todoToDelete.id).delete { error in
+            
+            // Check for errors
+            if error == nil {
+                // No errors
+                
+                // Update the UI from the main thread
+                DispatchQueue.main.async {
+                    
+                    // Remove the todo that was just deleted
+                    self.list.removeAll { todo in
+                        
+                        // Check for the todo to remove
+                        return todo.id == todoToDelete.id
+                    }
+                }
+                
+                
+            }
+        }
+        
+    }
     
 }
-
