@@ -49,10 +49,10 @@ class FirebaseService: ObservableObject {
                        // Update the list property in the main thread
                        DispatchQueue.main.async {
                            
-                           // Get all the documents and create Todos
+                           // Get all the documents and create Notes
                            self.list = snapshot.documents.map { d in
                                
-                               // Create a Todo item for each document returned
+                               // Create a Note(item i should change name if my struct that hold list) for each document returned
                                return Item(id: d.documentID,
                                            title: d["title"] as? String ?? "")
                                           
@@ -68,10 +68,10 @@ class FirebaseService: ObservableObject {
            }
        }
  
-    func deleteData(todoToDelete: Item) {
+    func deleteData(noteToDelete: Item) {
         
         // Specify the document to delete
-        db.collection(notesCol).document(todoToDelete.id).delete { error in
+        db.collection(notesCol).document(noteToDelete.id).delete { error in
             
             // Check for errors
             if error == nil {
@@ -80,11 +80,11 @@ class FirebaseService: ObservableObject {
                 // Update the UI from the main thread
                 DispatchQueue.main.async {
                     
-                    // Remove the todo that was just deleted
-                    self.list.removeAll { todo in
+                    // Remove the item that was just deleted
+                    self.list.removeAll { note in
                         
-                        // Check for the todo to remove
-                        return todo.id == todoToDelete.id
+                        // Check for the note to remove
+                        return note.id == noteToDelete.id
                     }
                 }
                 
