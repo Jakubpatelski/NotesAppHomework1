@@ -25,37 +25,39 @@ struct ContentView: View {
                             ForEach($model.list) { item in
                                 NavigationLink(destination: DetailView(text: item.title)) {
                                     Text(item.title.wrappedValue)
+                                        .lineLimit(1)
                                 }
                                 
                             }
                             .onDelete { indexSet in
                             
-                            // Delete the selected todos
+                            // Delete the selected note
                             let todosToDelete = indexSet.map { model.list[$0] }
                             todosToDelete.forEach(model.deleteData)
-//                                model.deleteData(todoToDelete: )
                             }
                             
                         }
-                        
-                        Button(action: {  showNewScreen.toggle() }, label: {
-                             Text("Add Note")
-                              .foregroundColor(Color.blue)
-                    })
 
                     }
 
                     .navigationBarTitle("Notes")
                         
                 }
+                    .toolbar{
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Add"){
+                                showNewScreen.toggle()
+                            }
+                        }
+                    }
                         .sheet(isPresented: $showNewScreen) {
                             NewScreen(model: model, showNewScreen: $showNewScreen, list: $model.list)
-                                                    }
-                
+                            }
+         
             }
     }
    
-//     init() set up  view's initial state or canperform any other necessary setup before the view is displayed.
+//     init() set up  view's initial state or can perform any other necessary setup before the view is displayed.
     init() {
             model.getData()
         }
@@ -68,14 +70,13 @@ struct NewScreen: View {
 
     @Binding var showNewScreen: Bool
     @State var title = ""
-    @Binding var list: [Item]
+    @Binding var list: [Note]
     var body: some View {
         NavigationView {
             VStack(spacing: 30) {
                 TextField("Enter text", text: $title)
                     .padding()
                     .background(Color(hue: 0.011, saturation: 0.014, brightness: 0.843).cornerRadius(10))
-                    .foregroundColor(.black)
                     .font(.headline)
 
                 Button(action: {
@@ -103,13 +104,10 @@ struct NewScreen: View {
 }
    
 
-//hasImage, text in firebase
-
-struct Item: Identifiable {
+struct Note: Identifiable {
     var id: String
     var title: String
-    var image: UIImage? = nil
-    var hasImage = false
+    
 }
 
 

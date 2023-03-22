@@ -7,11 +7,13 @@
 
 import Foundation
 
+//file manager that i used before implementing firebase
+
 //class MyFileManager: ObservableObject {
 //    
 //    let fService = FirebaseService()
 //    let userDefaults = UserDefaults.standard
-//   @Published var items = [Item]()//our local database
+//   @Published var items = [Item]()// local database
 //    let arrayKey = "key"
 //    
 //    init() {

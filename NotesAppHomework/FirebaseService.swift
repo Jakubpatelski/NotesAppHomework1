@@ -8,19 +8,21 @@
 import Foundation
 import Firebase
 
+
 class FirebaseService: ObservableObject {
     
+   
     
     // Get a reference to the database
     let db = Firestore.firestore()
-    @Published var list = [Item]()
-    var notesCol = "notes2"
+    @Published var list = [Note]()
+    var collection = "notes2"
     
     
     func addData(title: String) {
            
            // Add a document to a collection
-           db.collection(notesCol).addDocument(data: ["title": title,]) { error in
+           db.collection(collection).addDocument(data: ["title": title,]) { error in
                
                // Check for errors
                if error == nil {
@@ -38,7 +40,7 @@ class FirebaseService: ObservableObject {
        func getData() {
 
            // Read the documents at a specific path
-           db.collection(notesCol).getDocuments { snapshot, error in
+           db.collection(collection).getDocuments { snapshot, error in
                
                // Check for errors
                if error == nil {
@@ -52,8 +54,8 @@ class FirebaseService: ObservableObject {
                            // Get all the documents and create Notes
                            self.list = snapshot.documents.map { d in
                                
-                               // Create a Note(item i should change name if my struct that hold list) for each document returned
-                               return Item(id: d.documentID,
+                               // Create a Note for each document returned
+                               return Note(id: d.documentID,
                                            title: d["title"] as? String ?? "")
                                           
                            }
@@ -68,10 +70,10 @@ class FirebaseService: ObservableObject {
            }
        }
  
-    func deleteData(noteToDelete: Item) {
+    func deleteData(noteToDelete: Note) {
         
         // Specify the document to delete
-        db.collection(notesCol).document(noteToDelete.id).delete { error in
+        db.collection(collection).document(noteToDelete.id).delete { error in
             
             // Check for errors
             if error == nil {
