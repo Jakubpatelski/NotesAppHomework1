@@ -22,7 +22,7 @@ class FirebaseService: ObservableObject {
     func addData(title: String) {
            
            // Add a document to a collection
-           db.collection(collection).addDocument(data: ["title": title,]) { error in
+           db.collection(collection).addDocument(data: ["title": title]) { error in
                
                // Check for errors
                if error == nil {
@@ -95,5 +95,19 @@ class FirebaseService: ObservableObject {
         }
         
     }
+    
+    
+    func updateData(noteToUpdate: Note){
+        
+        //merge -> true will not overwrite it will marge so if i would have more fields in  database they wouldnt be overwritten
+        db.collection(collection).document(noteToUpdate.id).setData(["title": noteToUpdate.title], merge: true){ error in
+            
+            if error == nil {
+                self.getData()
+            }
+            
+        }
+    }
+    
     
 }

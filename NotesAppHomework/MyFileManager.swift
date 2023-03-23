@@ -7,7 +7,7 @@
 
 import Foundation
 
-//file manager that i used before implementing firebase
+//file manager that i used before implemented firebase
 
 //class MyFileManager: ObservableObject {
 //    

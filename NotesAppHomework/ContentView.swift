@@ -23,7 +23,7 @@ struct ContentView: View {
                         Section("Notes"){
                             
                             ForEach($model.list) { item in
-                                NavigationLink(destination: DetailView(text: item.title)) {
+                                NavigationLink(destination: DetailView(text: item.title, note: item.wrappedValue)) {
                                     Text(item.title.wrappedValue)
                                         .lineLimit(1)
                                 }
