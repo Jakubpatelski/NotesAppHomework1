@@ -99,7 +99,7 @@ class FirebaseService: ObservableObject {
     
     func updateData(noteToUpdate: Note){
         
-        //merge -> true will not overwrite it will marge so if i would have more fields in  database they wouldnt be overwritten
+        //merge -> true - will not overwrite the record, it will marge so only the given field will be changed
         db.collection(collection).document(noteToUpdate.id).setData(["title": noteToUpdate.title], merge: true){ error in
             
             if error == nil {
