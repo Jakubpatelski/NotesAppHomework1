@@ -9,12 +9,11 @@ import SwiftUI
 import PhotosUI
 
 struct DetailView: View {
+    
     @Binding var text: String
     @ObservedObject var model = FirebaseService()
     let note: Note // note object that contains the note details
     @State private var isModified = false // Add a flag to track if the data has been modified
-
-
 
     var body: some View {
         VStack{
@@ -26,7 +25,6 @@ struct DetailView: View {
                       isModified = true // Set the flag to true when the text is changed
                    }
  
-                
         }
         .padding()
 
@@ -38,7 +36,7 @@ struct DetailView: View {
             }
          }
         
-        }
+    }
     
     private func onTextChanged() {
          isModified = true

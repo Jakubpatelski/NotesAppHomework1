@@ -13,10 +13,8 @@ struct ContentView: View {
     @State var showNewScreen: Bool = false
     @State var title = ""
     
-   
     var body: some View {
        
-        
                 NavigationView {
                     VStack {
                     List {
@@ -30,10 +28,10 @@ struct ContentView: View {
                                 
                             }
                             .onDelete { indexSet in
-                            
                             // Delete the selected note
                             let todosToDelete = indexSet.map { model.list[$0] }
                             todosToDelete.forEach(model.deleteData)
+                                
                             }
                             
                         }
@@ -60,18 +58,20 @@ struct ContentView: View {
 //     init() set up  view's initial state or can perform any other necessary setup before the view is displayed.
     init() {
             model.getData()
-        }
+    }
     
 
 }
 
 struct NewScreen: View {
+    
     @ObservedObject var model: FirebaseService
-
     @Binding var showNewScreen: Bool
     @State var title = ""
     @Binding var list: [Note]
+    
     var body: some View {
+        
         NavigationView {
             VStack(spacing: 30) {
                 TextField("Enter text", text: $title)
